@@ -183,14 +183,17 @@ export function AppNavPanel({ onNavigate, mobileClose }: AppNavPanelProps) {
         >
           {isDemoMode ? t('demoLabel') : user?.email}
         </p>
-        <button
-          type="button"
-          onClick={handleLogout}
-          className="flex min-h-11 shrink-0 items-center gap-1.5 rounded-lg px-2 text-sm text-(--text-muted) transition-colors hover:text-(--accent)"
-        >
-          <LogOut className="h-3.5 w-3.5" />
-          {isDemoMode ? t('exitDemo') : t('logout')}
-        </button>
+        {/* Icon only, so the account label has room (e.g. "Demo (przykładowe dane)" in Polish). */}
+        <Tooltip content={isDemoMode ? t('exitDemo') : t('logout')} align="end">
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="grid size-11 shrink-0 place-items-center rounded-lg border border-(--border) bg-(--bg-dark) p-0 text-(--text-muted) transition-colors hover:border-(--accent)/50 hover:text-(--accent)"
+            aria-label={isDemoMode ? t('exitDemo') : t('logout')}
+          >
+            <LogOut className="size-[18px] shrink-0" aria-hidden />
+          </button>
+        </Tooltip>
       </div>
     </>
   )

@@ -2,7 +2,7 @@ import { useMemo, useRef, useState, useCallback, useEffect } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import { useTranslation } from 'react-i18next'
 import { AnimatePresence } from 'framer-motion'
-import { Pencil, Plus, Receipt, StickyNote, Trash2 } from 'lucide-react'
+import { Pencil, Plus, Receipt, SlidersHorizontal, StickyNote, Trash2 } from 'lucide-react'
 import { Card } from '../../components/Card'
 import { EmptyState } from '../../components/EmptyState'
 import { TransactionModal } from '../../components/TransactionModal'
@@ -22,6 +22,7 @@ import { invalidateFinanceQueries } from '../../lib/invalidateFinanceQueries'
 import { useFinanceTransactionSubmit, type TransactionFormData } from '../../hooks/useFinanceTransactionSubmit'
 import { TransactionsPageSkeleton } from '../../components/skeletons'
 import { ConfirmDialog } from '../../components/ConfirmDialog'
+import { ModalShell } from '../../components/ModalShell'
 import { PaymentMethodBadge } from '../../components/finance/PaymentMethodPicker'
 import { useUndoDelete } from '../../components/learning/UndoToast'
 import type { PaymentMethod } from '../../lib/paymentMethod'
@@ -60,6 +61,7 @@ export function Transactions() {
   const [amountMin, setAmountMin] = useState('')
   const [amountMax, setAmountMax] = useState('')
   const [sortBy, setSortBy] = useState<SortBy>('date_desc')
+  const [filtersOpen, setFiltersOpen] = useState(false)
   const [deleteConfirmTx, setDeleteConfirmTx] = useState<Transaction | null>(null)
   const [noteTx, setNoteTx] = useState<Transaction | null>(null)
   const loading = useApiFinance ? financeLoading : false
@@ -269,6 +271,90 @@ export function Transactions() {
       })
   }, [filteredTransactions, pendingId, searchText, categoryFilter, paymentMethodFilter, amountMin, amountMax, sortBy])
 
+  // Filter controls — shown inline on desktop and in a bottom sheet on phones.
+  const searchInput = (
+    <input
+      type="search"
+      value={searchText}
+      onChange={(e) => setSearchText(e.target.value)}
+      placeholder={t('transactions.searchPlaceholder')}
+      className="min-h-11 min-w-0 w-full rounded-lg border border-(--border) bg-(--bg-dark) px-3 py-2 text-base text-(--text-primary)"
+    />
+  )
+  const amountMinInput = (
+    <input
+      type="number"
+      min="0"
+      value={amountMin}
+      onChange={(e) => setAmountMin(e.target.value)}
+      placeholder={t('transactions.amountFrom')}
+      className="no-spinners min-h-11 min-w-0 w-full rounded-lg border border-(--border) bg-(--bg-dark) px-3 py-2 text-base text-(--text-primary)"
+    />
+  )
+  const amountMaxInput = (
+    <input
+      type="number"
+      min="0"
+      value={amountMax}
+      onChange={(e) => setAmountMax(e.target.value)}
+      placeholder={t('transactions.amountTo')}
+      className="no-spinners min-h-11 min-w-0 w-full rounded-lg border border-(--border) bg-(--bg-dark) px-3 py-2 text-base text-(--text-primary)"
+    />
+  )
+  const categorySelect = (
+    <select
+      value={categoryFilter}
+      onChange={(e) => setCategoryFilter(e.target.value)}
+      className="min-h-11 min-w-0 w-full rounded-lg border border-(--border) bg-(--bg-dark) px-3 py-2 text-base text-(--text-primary)"
+      aria-label={t('transactions.categoryFilterAria')}
+    >
+      {categoryOptions.map((cat) => (
+        <option key={cat === EXPENSE_CATEGORY_NONE ? '__none__' : cat} value={cat}>
+          {categoryFilterLabel(cat)}
+        </option>
+      ))}
+    </select>
+  )
+  const paymentSelect = (
+    <select
+      value={paymentMethodFilter}
+      onChange={(e) => setPaymentMethodFilter(e.target.value as typeof paymentMethodFilter)}
+      className="min-h-11 min-w-0 w-full rounded-lg border border-(--border) bg-(--bg-dark) px-3 py-2 text-base text-(--text-primary)"
+      aria-label={t('transactions.paymentFilterAria')}
+    >
+      <option value="all">{t('transactions.allPayments')}</option>
+      <option value="card">{t('transactions.card')}</option>
+      <option value="cash">{t('transactions.cash')}</option>
+      <option value="unset">{t('transactions.unmarked')}</option>
+    </select>
+  )
+  const sortSelect = (
+    <select
+      value={sortBy}
+      onChange={(e) => setSortBy(e.target.value as SortBy)}
+      className="min-h-11 min-w-0 w-full rounded-lg border border-(--border) bg-(--bg-dark) px-3 py-2 text-base text-(--text-primary) focus:border-(--accent)/50 focus:outline-none"
+      aria-label={t('transactions.sortAria')}
+    >
+      <option value="date_desc">{t('transactions.sortDateDesc')}</option>
+      <option value="date_asc">{t('transactions.sortDateAsc')}</option>
+      <option value="amount_desc">{t('transactions.sortAmountDesc')}</option>
+      <option value="amount_asc">{t('transactions.sortAmountAsc')}</option>
+    </select>
+  )
+  const activeFilterCount =
+    (amountMin ? 1 : 0) +
+    (amountMax ? 1 : 0) +
+    (categoryFilter !== 'all' ? 1 : 0) +
+    (paymentMethodFilter !== 'all' ? 1 : 0) +
+    (sortBy !== 'date_desc' ? 1 : 0)
+  const clearFilters = () => {
+    setAmountMin('')
+    setAmountMax('')
+    setCategoryFilter('all')
+    setPaymentMethodFilter('all')
+    setSortBy('date_desc')
+  }
+
   if (loading) return <TransactionsPageSkeleton />
 
   return (
@@ -350,67 +436,39 @@ export function Transactions() {
           ))}
         </div>
 
-        <div className="mb-4 space-y-2">
-          <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
-            <input
-              type="search"
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-              placeholder={t('transactions.searchPlaceholder')}
-              className="col-span-2 min-h-11 min-w-0 w-full rounded-lg border border-(--border) bg-(--bg-dark) px-3 py-2 text-base text-(--text-primary) md:col-span-1"
-            />
-            <input
-              type="number"
-              min="0"
-              value={amountMin}
-              onChange={(e) => setAmountMin(e.target.value)}
-              placeholder={t('transactions.amountFrom')}
-              className="no-spinners min-h-11 min-w-0 w-full rounded-lg border border-(--border) bg-(--bg-dark) px-3 py-2 text-base text-(--text-primary)"
-            />
-            <input
-              type="number"
-              min="0"
-              value={amountMax}
-              onChange={(e) => setAmountMax(e.target.value)}
-              placeholder={t('transactions.amountTo')}
-              className="no-spinners min-h-11 min-w-0 w-full rounded-lg border border-(--border) bg-(--bg-dark) px-3 py-2 text-base text-(--text-primary)"
-            />
+        {/* Phones: search + a "Filters" button; the rest of the filters live in a bottom sheet. */}
+        <div className="mb-4 flex gap-2 md:hidden">
+          <div className="min-w-0 flex-1">{searchInput}</div>
+          <button
+            type="button"
+            onClick={() => setFiltersOpen(true)}
+            className={`flex min-h-11 shrink-0 items-center gap-2 rounded-lg border px-3 text-base transition-colors ${
+              activeFilterCount > 0
+                ? 'border-(--accent)/50 bg-(--accent)/15 text-(--accent)'
+                : 'border-(--border) bg-(--bg-dark) text-(--text-muted)'
+            }`}
+            aria-label={t('transactions.filtersAria')}
+          >
+            <SlidersHorizontal className="h-4 w-4" />
+            {t('transactions.filters')}
+            {activeFilterCount > 0 && (
+              <span className="grid min-w-5 place-items-center rounded-full bg-(--accent) px-1.5 text-xs font-semibold text-(--bg-dark)">
+                {activeFilterCount}
+              </span>
+            )}
+          </button>
+        </div>
+
+        <div className="mb-4 hidden space-y-2 md:block">
+          <div className="grid grid-cols-3 gap-2">
+            {searchInput}
+            {amountMinInput}
+            {amountMaxInput}
           </div>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
-            <select
-              value={categoryFilter}
-              onChange={(e) => setCategoryFilter(e.target.value)}
-              className="min-h-11 min-w-0 w-full rounded-lg border border-(--border) bg-(--bg-dark) px-3 py-2 text-base text-(--text-primary)"
-              aria-label={t('transactions.categoryFilterAria')}
-            >
-              {categoryOptions.map((cat) => (
-                <option key={cat === EXPENSE_CATEGORY_NONE ? '__none__' : cat} value={cat}>
-                  {categoryFilterLabel(cat)}
-                </option>
-              ))}
-            </select>
-            <select
-              value={paymentMethodFilter}
-              onChange={(e) => setPaymentMethodFilter(e.target.value as typeof paymentMethodFilter)}
-              className="min-h-11 min-w-0 w-full rounded-lg border border-(--border) bg-(--bg-dark) px-3 py-2 text-base text-(--text-primary)"
-              aria-label={t('transactions.paymentFilterAria')}
-            >
-              <option value="all">{t('transactions.allPayments')}</option>
-              <option value="card">{t('transactions.card')}</option>
-              <option value="cash">{t('transactions.cash')}</option>
-              <option value="unset">{t('transactions.unmarked')}</option>
-            </select>
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value as SortBy)}
-              className="min-h-11 min-w-0 w-full rounded-lg border border-(--border) bg-(--bg-dark) px-3 py-2 text-base text-(--text-primary) focus:border-(--accent)/50 focus:outline-none"
-              aria-label={t('transactions.sortAria')}
-            >
-              <option value="date_desc">{t('transactions.sortDateDesc')}</option>
-              <option value="date_asc">{t('transactions.sortDateAsc')}</option>
-              <option value="amount_desc">{t('transactions.sortAmountDesc')}</option>
-              <option value="amount_asc">{t('transactions.sortAmountAsc')}</option>
-            </select>
+          <div className="grid grid-cols-3 gap-2">
+            {categorySelect}
+            {paymentSelect}
+            {sortSelect}
           </div>
         </div>
 
@@ -648,6 +706,45 @@ export function Transactions() {
         }
         hint={editingTx?.isScheduled ? t('transactions.editRecurringPaymentHint') : undefined}
       />
+
+      <ModalShell
+        isOpen={filtersOpen}
+        onClose={() => setFiltersOpen(false)}
+        maxWidth="max-w-md"
+        backdropKey="tx-filters-backdrop"
+        panelKey="tx-filters-panel"
+      >
+        <h3 className="mb-4 text-lg font-bold font-display text-(--text-primary)">{t('transactions.filters')}</h3>
+        <div className="space-y-3">
+          <div>
+            <p className="mb-1.5 text-sm text-(--text-muted)">{t('transactions.filterAmount')}</p>
+            <div className="grid grid-cols-2 gap-2">
+              {amountMinInput}
+              {amountMaxInput}
+            </div>
+          </div>
+          {categorySelect}
+          {paymentSelect}
+          {sortSelect}
+        </div>
+        <div className="mt-5 flex gap-2">
+          <button
+            type="button"
+            onClick={clearFilters}
+            disabled={activeFilterCount === 0}
+            className="min-h-11 rounded-lg border border-(--border) px-4 text-base text-(--text-muted) transition-colors hover:text-(--text-primary) disabled:opacity-40"
+          >
+            {t('transactions.clearFilters')}
+          </button>
+          <button
+            type="button"
+            onClick={() => setFiltersOpen(false)}
+            className="min-h-11 flex-1 rounded-lg border border-(--accent)/40 bg-(--accent)/20 px-4 text-base font-display text-(--accent) transition-colors hover:bg-(--accent)/30"
+          >
+            {t('transactions.showResults', { count: filteredAndSortedTransactions.length })}
+          </button>
+        </div>
+      </ModalShell>
 
       <ConfirmDialog
         isOpen={deleteConfirmTx != null}
