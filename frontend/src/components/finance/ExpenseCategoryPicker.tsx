@@ -1,14 +1,21 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Check, Plus, Trash2 } from 'lucide-react'
+import { Check, Palette, Plus, Trash2 } from 'lucide-react'
 import { capitalizeFirstPl } from '../../lib/capitalizeFirst'
 import { EXPENSE_CATEGORY_NONE } from '../../lib/expenseCategoryConstants'
 import { ConfirmDialog } from '../ConfirmDialog'
 
+/** Ready-made colours ordered by hue, so similar shades sit next to each other. Any other colour can be
+ * picked with the custom colour button. */
 const PRESET_COLORS = [
-  '#63b28f', '#82a7cf', '#c9a35c', '#b58cc4', '#e57373', '#64b5f6', '#9d4edd',
-  '#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#dfe6e9', '#fd79a8',
-  '#a29bfe', '#6c5ce7', '#00b894', '#e17055',
+  // reds, oranges, yellows
+  '#e57373', '#ff6b6b', '#e17055', '#ff8a65', '#ffb74d', '#c9a35c', '#ffd54f', '#ffeaa7',
+  // greens, teals
+  '#dce775', '#aed581', '#96ceb4', '#63b28f', '#00b894', '#2e8b6a', '#4ecdc4', '#4db6ac',
+  // blues, purples
+  '#4dd0e1', '#45b7d1', '#64b5f6', '#82a7cf', '#3f6fb5', '#7986cb', '#a29bfe', '#6c5ce7',
+  // violets, pinks, neutrals
+  '#9d4edd', '#b58cc4', '#ce93d8', '#fd79a8', '#f06292', '#a1887f', '#90a4ae', '#dfe6e9',
 ] as const
 
 export const DEFAULT_NEW_EXPENSE_CATEGORY_COLOR: string = PRESET_COLORS[0]
@@ -51,6 +58,10 @@ export function ExpenseCategoryPicker({
 }: ExpenseCategoryPickerProps) {
   const { t } = useTranslation('finances')
   const canManage = Boolean(onDeleteCategory || onAddCategory)
+  // Colours already taken by other categories get a small dot, and a new category starts with a free one.
+  const usedColors = new Set(categories.map((c) => c.color.toLowerCase()))
+  const isCustomColor = !(PRESET_COLORS as readonly string[]).includes(newCategoryColor.toLowerCase())
+  const firstFreeColor = PRESET_COLORS.find((c) => !usedColors.has(c)) ?? DEFAULT_NEW_EXPENSE_CATEGORY_COLOR
   const selectValue = resolveSelectValue(category, categories)
   const [deleteTarget, setDeleteTarget] = useState<CategoryOption | null>(null)
 
@@ -108,7 +119,10 @@ export function ExpenseCategoryPicker({
               {!showAddCategory ? (
                 <button
                   type="button"
-                  onClick={() => setShowAddCategory(true)}
+                  onClick={() => {
+                    setNewCategoryColor(firstFreeColor)
+                    setShowAddCategory(true)
+                  }}
                   className="flex w-full items-center justify-center gap-1.5 rounded-md border border-dashed border-(--border) py-1.5 text-sm text-(--text-muted) font-display transition-colors hover:border-(--accent)/35 hover:text-(--accent)"
                 >
                   <Plus className="h-3.5 w-3.5 shrink-0" />
@@ -124,23 +138,50 @@ export function ExpenseCategoryPicker({
                     className="w-full px-2 py-1.5 rounded-md bg-(--bg-dark) border border-(--border) text-(--text-primary) text-sm focus:border-(--accent) focus:outline-none"
                   />
                   <div className="flex flex-wrap gap-2">
-                    {PRESET_COLORS.map((col) => (
-                      <button
-                        key={col}
-                        type="button"
-                        onClick={() => setNewCategoryColor(col)}
-                        className={`relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 transition-all ${
-                          newCategoryColor === col ? 'border-(--accent)' : 'border-transparent hover:ring-1 hover:ring-white/15'
-                        }`}
-                        style={{ backgroundColor: col }}
-                        title={col}
-                        aria-label={t('expenseCategoryPicker.colorAria', { color: col })}
-                      >
-                        {newCategoryColor === col && (
-                          <Check className="h-3.5 w-3.5 text-[#000000] drop-shadow-[0_0_2px_rgba(0,0,0,0.55)]" />
-                        )}
-                      </button>
-                    ))}
+                    {PRESET_COLORS.map((col) => {
+                      const selected = newCategoryColor.toLowerCase() === col
+                      const used = usedColors.has(col)
+                      return (
+                        <button
+                          key={col}
+                          type="button"
+                          onClick={() => setNewCategoryColor(col)}
+                          className={`relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 transition-all ${
+                            selected ? 'border-(--accent)' : 'border-transparent hover:ring-1 hover:ring-white/15'
+                          }`}
+                          style={{ backgroundColor: col }}
+                          title={used ? t('expenseCategoryPicker.colorUsed', { color: col }) : col}
+                          aria-label={t('expenseCategoryPicker.colorAria', { color: col })}
+                        >
+                          {selected ? (
+                            <Check className="h-3.5 w-3.5 text-[#000000] drop-shadow-[0_0_2px_rgba(0,0,0,0.55)]" />
+                          ) : (
+                            used && <span className="h-1.5 w-1.5 rounded-full bg-black/45" aria-hidden />
+                          )}
+                        </button>
+                      )
+                    })}
+                    {/* Custom colour: the native colour picker, shown as one more swatch. */}
+                    <label
+                      className={`relative flex h-7 w-7 shrink-0 cursor-pointer items-center justify-center rounded-full border-2 transition-all ${
+                        isCustomColor ? 'border-(--accent)' : 'border-dashed border-(--text-muted)/60 hover:border-(--accent)/60'
+                      }`}
+                      style={isCustomColor ? { backgroundColor: newCategoryColor } : undefined}
+                      title={t('expenseCategoryPicker.customColor')}
+                    >
+                      {isCustomColor ? (
+                        <Check className="h-3.5 w-3.5 text-[#000000] drop-shadow-[0_0_2px_rgba(0,0,0,0.55)]" />
+                      ) : (
+                        <Palette className="h-3.5 w-3.5 text-(--text-muted)" aria-hidden />
+                      )}
+                      <input
+                        type="color"
+                        value={newCategoryColor}
+                        onChange={(e) => setNewCategoryColor(e.target.value.toLowerCase())}
+                        className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
+                        aria-label={t('expenseCategoryPicker.customColor')}
+                      />
+                    </label>
                   </div>
                   <div className="flex justify-end gap-1.5">
                     <button

@@ -298,6 +298,8 @@
     "newCategory": "Nowa",
     "namePlaceholder": "Nazwa…",
     "colorAria": "Kolor {{color}}",
+    "colorUsed": "{{color}} — używany przez inną kategorię",
+    "customColor": "Własny kolor",
     "add": "Dodaj",
     "deleteCategoryConfirmTitle": "Usunąć kategorię?",
     "deleteCategoryConfirmDescription": "Tej operacji nie można cofnąć. W istniejących wydatkach może pozostać stara nazwa kategorii."

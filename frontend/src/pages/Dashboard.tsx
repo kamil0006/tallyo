@@ -22,6 +22,7 @@ import { useDemoData, DEMO_EXPENSES, DEMO_INCOME, DEMO_SCHEDULED_EXPENSES } from
 import { useMonth } from '../context/MonthContext'
 import { useEvents } from '../context/EventsContext'
 import { useTodos } from '../context/TodosContext'
+import { compareTodosForDisplay, isArchivedTodo } from '../lib/todoDomain'
 import { useHabits } from '../context/HabitsContext'
 import { useNotes } from '../context/NotesContext'
 import { MonthSelector } from '../components/MonthSelector'
@@ -100,13 +101,16 @@ export function Dashboard() {
     isLoading: financeLoading,
   } = useFinanceListsQuery()
   const monthCtx = useMonth()
-  const { todos, loading: todosLoading } = useTodos()
+  const { todos, loading: todosLoading, toggleTodo } = useTodos()
   const { habits, goals } = useHabits()
   const notesCtx = useNotes()
   const isMobile = useIsMobile()
 
   const notesCount = notesCtx?.notes.filter((n) => !n.archivedAt).length ?? 0
-  const todoCount = todosLoading ? 0 : todos.filter((t) => !t.done).length
+  const openTodos = useMemo(
+    () => (todosLoading ? [] : todos.filter((t) => !t.done && !isArchivedTodo(t)).sort(compareTodosForDisplay)),
+    [todos, todosLoading]
+  )
   const selectedMonth = monthCtx?.selectedMonth ?? currentMonth
   const selectedYear = monthCtx?.selectedYear ?? currentYear
   const chartPeriod = useChartPeriod()
@@ -399,7 +403,8 @@ export function Dashboard() {
       {/* Upcoming events + Quick stats – extended grid */}
       <DashboardQuickStats
         upcomingEvents={upcomingEvents}
-        todoCount={todoCount}
+        openTodos={openTodos}
+        onToggleTodo={(id) => toggleTodo(id, true)}
         goals={goals}
         habitsToday={habitsToday}
         reduceMotion={reduceMotion}

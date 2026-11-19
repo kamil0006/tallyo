@@ -296,6 +296,8 @@
     "newCategory": "New",
     "namePlaceholder": "Name…",
     "colorAria": "Color {{color}}",
+    "colorUsed": "{{color}} — used by another category",
+    "customColor": "Custom colour",
     "add": "Add",
     "deleteCategoryConfirmTitle": "Delete this category?",
     "deleteCategoryConfirmDescription": "This action cannot be undone. Existing expenses may keep the old category name."
