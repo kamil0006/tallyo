@@ -333,7 +333,8 @@ export function GlobalPomodoro() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 12 }}
             aria-label={t('pomodoro.indicatorAria')}
-            className={`fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-50 flex items-center gap-2 rounded-full border px-4 py-2.5 font-display text-base shadow-xl backdrop-blur-md transition-colors lg:right-6 lg:bottom-6 ${
+            // z-35: above the page and header (z-30), below the mobile menu (z-40) and modals
+            className={`fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-35 flex items-center gap-2 rounded-full border px-4 py-2.5 font-display text-base shadow-xl backdrop-blur-md transition-colors lg:right-6 lg:bottom-6 ${
               status === 'completed'
                 ? 'border-(--positive)/50 bg-(--bg-card)/95 text-(--positive)'
                 : status === 'paused'
