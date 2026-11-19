@@ -15,11 +15,3 @@ export const apiRateLimiter = rateLimit({
   legacyHeaders: false,
   message: { error: 'Zbyt wiele żądań. Zwolnij tempo i spróbuj ponownie.' },
 })
-
-export const aiRateLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000,
-  max: 12,
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: { error: 'Limit generowania raportów AI na godzinę został wyczerpany.' },
-})

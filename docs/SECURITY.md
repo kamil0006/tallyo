@@ -12,7 +12,6 @@ Security guide for the **private (production)** and **public (showcase/demo)** v
 | `ENCRYPTION_ENABLED` | `false` | **`true`** |
 | `REGISTRATION_ENABLED` | `true` (optional) | **`false`** |
 | `MAX_USERS` | empty (no limit) | e.g. `2` — alternative: `REGISTRATION_ENABLED=true` + an account cap |
-| OpenAI | **`false`** | Opt-in only |
 | JWT / session | Strong secret in `.env` | Strong secret + httpOnly cookies |
 
 ## Production deployment checklist
@@ -28,9 +27,6 @@ ALLOW_DEV_RESET=false
 
 ENCRYPTION_ENABLED=true
 ENCRYPTION_KEY=<node -e "console.log(require('crypto').randomBytes(32).toString('base64'))">
-
-AI_REPORT_ENABLED=false
-AI_USE_OPENAI=false
 ```
 
 ### After deploy
@@ -65,12 +61,6 @@ AI_USE_OPENAI=false
   - Notes: content, title, reference source
   - Finance (text): transaction names, income sources, account names, adjustment descriptions
 - Financial amounts remain numeric (DB sorting/filtering)
-
-### AI
-
-- Disabled by default
-- Requires `AI_REPORT_ENABLED=true` **and** `AI_USE_OPENAI=true` **and** an API key
-- Only aggregated, minimized payload is sent to OpenAI (no note content or individual transactions)
 
 ### Input validation
 

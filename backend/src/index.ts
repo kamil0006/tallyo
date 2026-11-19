@@ -18,7 +18,6 @@ import { expenseCategoriesRouter } from './routes/expenseCategories.js'
 import { netWorthRouter } from './routes/netWorth.js'
 import { notesRouter } from './routes/notes.js'
 import { learningRouter } from './routes/learning.js'
-import { aiRouter } from './routes/ai.js'
 import { backupRouter } from './routes/backup.js'
 import { exchangeRatesRouter } from './routes/exchangeRates.js'
 import { authMiddleware } from './middleware/auth.js'
@@ -66,7 +65,6 @@ app.use('/api/expense-categories', authMiddleware, expenseCategoriesRouter)
 app.use('/api/net-worth', authMiddleware, netWorthRouter)
 app.use('/api/notes', authMiddleware, notesRouter)
 app.use('/api/learning', authMiddleware, learningRouter)
-app.use('/api/ai', authMiddleware, aiRouter)
 app.use('/api/backup', authMiddleware, backupRouter)
 
 app.use(errorHandler)

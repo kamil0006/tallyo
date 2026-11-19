@@ -12,7 +12,6 @@ Przewodnik bezpieczeństwa dla wersji **prywatnej (production)** i **publicznej 
 | `ENCRYPTION_ENABLED` | `false` | **`true`** |
 | `REGISTRATION_ENABLED` | `true` (opcjonalnie) | **`false`** |
 | `MAX_USERS` | puste (bez limitu) | np. `2` — alternatywa: `REGISTRATION_ENABLED=true` + limit kont |
-| OpenAI | **`false`** | Tylko świadomy opt-in |
 | JWT / sesja | Silny secret w `.env` | Silny secret + httpOnly cookies |
 
 ## Checklist wdrożenia produkcyjnego
@@ -28,9 +27,6 @@ ALLOW_DEV_RESET=false
 
 ENCRYPTION_ENABLED=true
 ENCRYPTION_KEY=<node -e "console.log(require('crypto').randomBytes(32).toString('base64'))">
-
-AI_REPORT_ENABLED=false
-AI_USE_OPENAI=false
 ```
 
 ### Po wdrożeniu
@@ -65,12 +61,6 @@ AI_USE_OPENAI=false
   - Notatki: treść, tytuł, źródło referencji
   - Finanse (tekst): nazwy transakcji, źródła przychodów, nazwy kont, opisy korekt
 - Kwoty finansowe pozostają jako liczby (sortowanie w DB)
-
-### AI
-
-- Domyślnie wyłączone
-- Wymaga `AI_REPORT_ENABLED=true` **oraz** `AI_USE_OPENAI=true` **oraz** klucza API
-- Do OpenAI trafia tylko zagregowany, zminimalizowany payload (bez treści notatek ani pojedynczych transakcji)
 
 ### Walidacja wejścia
 

@@ -51,14 +51,6 @@ export function getEncryptionKey(): Buffer | null {
   return key
 }
 
-export function isOpenAiReportEnabled(): boolean {
-  return (
-    process.env.AI_REPORT_ENABLED === 'true' &&
-    process.env.AI_USE_OPENAI === 'true' &&
-    Boolean(process.env.OPENAI_API_KEY?.trim())
-  )
-}
-
 export function getCorsOrigins(): string[] {
   const frontend = process.env.FRONTEND_URL?.trim()
   if (isProduction) {
@@ -81,10 +73,5 @@ export function validateSecurityConfig(): void {
   getCorsOrigins()
   if (isEncryptionEnabled()) {
     getEncryptionKey()
-  }
-  if (isProduction && process.env.AI_USE_OPENAI === 'true' && process.env.AI_REPORT_ENABLED !== 'true') {
-    console.warn(
-      '[security] AI_USE_OPENAI=true bez AI_REPORT_ENABLED=true — raport AI wyłączony'
-    )
   }
 }

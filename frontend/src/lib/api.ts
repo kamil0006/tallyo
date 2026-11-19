@@ -12,7 +12,6 @@ export {
   goalsApi,
   notesApi,
   learningApi,
-  aiApi,
   backupApi,
 } from './api/index'
-export type { WeeklyReport, BackupStatus } from './api/index'
+export type { BackupStatus } from './api/index'
