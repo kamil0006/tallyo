@@ -81,7 +81,7 @@ export function AppNavPanel({ onNavigate, mobileClose }: AppNavPanelProps) {
               <span className="text-(--accent)">Tally</span>
               <span className="text-(--text-primary)">o</span>
             </Link>
-            <p className="text-sm text-(--text-muted) mt-1 font-mono tracking-wider">{t('version')}</p>
+            <p className="text-sm text-(--text-muted) mt-1 tabular-nums tracking-wider">{t('version')}</p>
             <div className="mt-2 grid grid-cols-[2.75rem_minmax(0,1fr)] gap-2">
               <Tooltip content={t('tutorialTooltip')} align="start">
                 <button
@@ -137,7 +137,7 @@ export function AppNavPanel({ onNavigate, mobileClose }: AppNavPanelProps) {
         {navSections.map((section) => (
           <div key={section.labelKey ?? 'dashboard'}>
             {section.labelKey && (
-              <p className="mb-2 px-4 text-xs font-medium uppercase tracking-wider text-(--text-muted)">
+              <p className="mb-2 px-4 text-[0.8rem] font-semibold uppercase tracking-wider text-(--text-muted)">
                 {t(section.labelKey)}
               </p>
             )}

@@ -512,7 +512,7 @@ export function Transactions() {
                           {catLabel}
                         </span>
                       ) : (
-                        <span className="text-sm text-(--text-muted) font-mono">{EXPENSE_CATEGORY_DISPLAY_NONE}</span>
+                        <span className="text-sm text-(--text-muted) tabular-nums">{EXPENSE_CATEGORY_DISPLAY_NONE}</span>
                       )}
                     </td>
                     <td className="py-3 whitespace-nowrap">

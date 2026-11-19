@@ -109,7 +109,7 @@ export function NetWorthAdjustModal({ isOpen, onClose, onSubmit, initialPosition
                   onClick={() => setIsAdd(false)}
                   className={`flex-1 py-2 rounded-lg font-display text-sm transition-colors ${
                     !isAdd
-                      ? 'bg-[#e74c3c]/20 text-[#e74c3c] border border-[#e74c3c]/40'
+                      ? 'bg-(--danger)/20 text-(--danger) border border-(--danger)/40'
                       : 'bg-(--bg-dark) text-(--text-muted) border border-(--border) hover:border-(--accent)/40'
                   }`}
                 >
@@ -125,7 +125,7 @@ export function NetWorthAdjustModal({ isOpen, onClose, onSubmit, initialPosition
                 inputMode="decimal"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value.replace(/[^0-9,.-]/g, ''))}
-                className="w-full px-3 py-2 rounded-lg bg-(--bg-dark) border border-(--border) text-(--text-primary) font-mono focus:border-(--accent) focus:outline-none"
+                className="w-full px-3 py-2 rounded-lg bg-(--bg-dark) border border-(--border) text-(--text-primary) tabular-nums focus:border-(--accent) focus:outline-none"
               />
             </div>
 
@@ -135,8 +135,8 @@ export function NetWorthAdjustModal({ isOpen, onClose, onSubmit, initialPosition
               return (
                 <div className="rounded-lg border border-(--border) bg-(--bg-dark)/50 px-3 py-2">
                   <p className="text-sm text-(--text-muted) font-display">{t('netWorthAdjustModal.previewLabel')}</p>
-                  <p className="text-base font-mono text-(--text-primary) mt-0.5">
-                    {formatPln(currentValue)} → <span className={isAdd ? 'text-(--positive)' : 'text-[#e74c3c]'}>{formatPln(newValue)}</span>
+                  <p className="text-base tabular-nums text-(--text-primary) mt-0.5">
+                    {formatPln(currentValue)} → <span className={isAdd ? 'text-(--positive)' : 'text-(--danger)'}>{formatPln(newValue)}</span>
                   </p>
                 </div>
               )

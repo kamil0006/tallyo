@@ -224,7 +224,7 @@ export function EventModal({
                 {categoryOnlyMode ? t('eventModal.manageCategories') : isEdit ? t('eventModal.editEvent') : t('eventModal.addEvent')}
               </h3>
               {holidayName && (
-                <p className="text-sm font-mono mt-1" style={{ color: '#e57373' }}>
+                <p className="text-sm tabular-nums mt-1" style={{ color: 'var(--danger)' }}>
                   {t('eventModal.holidayToday', { name: holidayName })}
                 </p>
               )}

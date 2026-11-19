@@ -44,7 +44,7 @@ function CertStatusBadge({ cert }: { cert: Certification }) {
 
   if (status === 'wygasly') {
     return (
-      <span className="flex items-center gap-1 px-2 py-0.5 rounded text-xs font-display bg-[#e74c3c]/10 text-[#e74c3c] border border-[#e74c3c]/30">
+      <span className="flex items-center gap-1 px-2 py-0.5 rounded text-xs font-display bg-(--danger)/10 text-(--danger) border border-(--danger)/30">
         <ShieldOff className="w-3 h-3" />
         {t('certificates.expired')}
       </span>
@@ -172,7 +172,7 @@ const CertAddForm = memo(function CertAddForm({ onAdd }: CertAddFormProps) {
             inputMode="numeric"
             value={renewalReminderDays}
             onChange={(e) => setRenewalReminderDays(e.target.value.replace(/\D/g, ''))}
-            className={`${learningFieldClass} max-w-32 font-mono`}
+            className={`${learningFieldClass} max-w-32 tabular-nums`}
           />
         </div>
       )}
@@ -296,7 +296,7 @@ function EditCertModal({ cert, onSave, onClose }: EditCertModalProps) {
               inputMode="numeric"
               value={editRenewalReminderDays}
               onChange={(e) => setEditRenewalReminderDays(e.target.value.replace(/\D/g, ''))}
-              className={`${learningFieldClass} max-w-32 font-mono`}
+              className={`${learningFieldClass} max-w-32 tabular-nums`}
             />
           </div>
         )}

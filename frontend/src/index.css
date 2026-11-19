@@ -8,9 +8,10 @@
 :root {
   /* Minimal, muted theme — graphite + steel accent */
   --bg-dark: #111315;
-  --bg-card: #17191c;
-  --bg-card-hover: #1d2024;
-  --border: #282c31;
+  /* Cards a step lighter than the page so sections stand apart without heavy borders */
+  --bg-card: #1b1e22;
+  --bg-card-hover: #22262b;
+  --border: #2c3137;
   --accent: #82a7cf;
   --accent-2: #b58cc4;
   --positive: #63b28f;
@@ -20,7 +21,7 @@
   --tx-income: #63b28f;
   --tx-expense: #c98a9b;
   --text-primary: #e7e9ec;
-  --text-muted: #969ca5;
+  --text-muted: #a4aab3;
 
   /* Mobile header — burger, logo, search */
   --mobile-header-pad-top: max(0.75rem, env(safe-area-inset-top, 0px));

@@ -53,7 +53,7 @@ export function LearningCard({
             <button
               type="button"
               onClick={onDelete}
-              className="rounded-lg p-2 text-(--text-muted) transition-colors hover:bg-[#e74c3c]/10 hover:text-[#e74c3c]"
+              className="rounded-lg p-2 text-(--text-muted) transition-colors hover:bg-(--danger)/10 hover:text-(--danger)"
               aria-label={t('common.delete')}
             >
               <Trash2 className="h-4 w-4" />
@@ -74,7 +74,7 @@ export function LearningCard({
               style={{ width: `${progress}%` }}
             />
           </div>
-          <span className="w-8 text-right text-xs font-mono text-(--text-muted)">{progress}%</span>
+          <span className="w-8 text-right text-xs tabular-nums text-(--text-muted)">{progress}%</span>
         </div>
       )}
     </div>

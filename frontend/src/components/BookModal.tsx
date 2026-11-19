@@ -207,7 +207,7 @@ export function BookModal({ book, bookCategories, onSave, onClose }: BookModalPr
                     inputMode="numeric"
                     value={rating}
                     onChange={(e) => updateField('rating', e.target.value.replace(/\D/g, ''))}
-                    className="w-full px-4 py-2.5 rounded-lg bg-(--bg-dark) border border-(--border) text-(--text-primary) font-mono focus:border-(--accent) focus:outline-none"
+                    className="w-full px-4 py-2.5 rounded-lg bg-(--bg-dark) border border-(--border) text-(--text-primary) tabular-nums focus:border-(--accent) focus:outline-none"
                   />
                 </div>
               </div>

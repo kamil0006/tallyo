@@ -30,8 +30,8 @@ export class AppErrorBoundary extends Component<Props, State> {
 
     return (
       <div className="flex min-h-svh items-center justify-center bg-(--bg-dark) p-6">
-        <div className="w-full max-w-md rounded-xl border border-[#e74c3c]/40 bg-(--bg-card) p-6 shadow-xl">
-          <h1 className="font-display text-lg font-bold text-[#e74c3c]">{i18n.t('common:errorBoundary.title')}</h1>
+        <div className="w-full max-w-md rounded-xl border border-(--danger)/40 bg-(--bg-card) p-6 shadow-xl">
+          <h1 className="font-display text-lg font-bold text-(--danger)">{i18n.t('common:errorBoundary.title')}</h1>
           <p className="mt-2 text-base text-(--text-muted)">
             {i18n.t('common:errorBoundary.description')}
           </p>

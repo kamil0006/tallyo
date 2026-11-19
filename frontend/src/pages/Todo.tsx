@@ -753,7 +753,7 @@ export function Todo() {
       )}
 
       <motion.div variants={itemEnter} className="relative flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <h1 className="font-display text-2xl font-bold tracking-wider text-(--text-primary)">TO-DO</h1>
+        <h1 className="font-display text-2xl font-bold tracking-tight text-(--text-primary) sm:text-3xl">To-do</h1>
         {isDemoMode && (
           <span className="font-display text-sm tracking-wide text-(--text-muted)">{t('demoLabel')}</span>
         )}

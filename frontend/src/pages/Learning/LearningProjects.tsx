@@ -48,7 +48,7 @@ function StatusBadge({ status }: { status: ProjectStatus }) {
     w_trakcie: 'bg-(--accent)/10 text-(--accent) border border-(--accent)/30',
     mvp: 'bg-(--warning)/10 text-(--warning) border border-(--warning)/30',
     ukonczony: 'bg-(--positive)/10 text-(--positive) border border-(--positive)/30',
-    porzucony: 'bg-[#e74c3c]/10 text-[#e74c3c] border border-[#e74c3c]/30',
+    porzucony: 'bg-(--danger)/10 text-(--danger) border border-(--danger)/30',
   }
   return (
     <span className={`px-2 py-0.5 rounded text-xs font-display ${bgMap[status]}`}>

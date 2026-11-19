@@ -166,7 +166,7 @@ const CourseAddForm = memo(function CourseAddForm({ onAdd, onCancel }: CourseAdd
             value={status === 'ukonczony' ? '100' : progress}
             onChange={(e) => status === 'w_trakcie' && setProgress(e.target.value.replace(/\D/g, ''))}
             readOnly={status === 'ukonczony'}
-            className={`${learningFieldClass} font-mono sm:max-w-32`}
+            className={`${learningFieldClass} tabular-nums sm:max-w-32`}
           />
         </div>
       )}
@@ -288,7 +288,7 @@ function EditCourseModal({ course, onSave, onClose }: EditCourseModalProps) {
                 editStatus === 'w_trakcie' && setEditProgress(e.target.value.replace(/\D/g, ''))
               }
               readOnly={editStatus === 'ukonczony'}
-              className={`${learningFieldClass} font-mono sm:max-w-32`}
+              className={`${learningFieldClass} tabular-nums sm:max-w-32`}
             />
           </div>
         )}

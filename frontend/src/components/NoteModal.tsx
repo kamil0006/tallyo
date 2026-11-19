@@ -93,7 +93,7 @@ export function NoteModal({ isOpen, onClose, note, type, onSave }: NoteModalProp
   }
 
   const markdownHint = (
-    <div className="text-sm text-(--text-muted) font-mono space-y-1">
+    <div className="text-sm text-(--text-muted) tabular-nums space-y-1">
       <p>
         <strong className="text-(--text-primary)">**text**</strong> – {t('noteModal.markdown.bold')}
       </p>
@@ -303,7 +303,7 @@ export function NoteModal({ isOpen, onClose, note, type, onSave }: NoteModalProp
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 {error && (
-                  <p className="text-sm text-[#e74c3c] font-display px-3 py-2 rounded-lg bg-[#e74c3c]/10 border border-[#e74c3c]/30">
+                  <p className="text-sm text-(--danger) font-display px-3 py-2 rounded-lg bg-(--danger)/10 border border-(--danger)/30">
                     {error}
                   </p>
                 )}
@@ -359,7 +359,7 @@ export function NoteModal({ isOpen, onClose, note, type, onSave }: NoteModalProp
                         value={referenceUrl}
                         onChange={(e) => updateField('referenceUrl', e.target.value)}
                         placeholder="https://…"
-                        className="w-full px-4 py-2.5 rounded-lg bg-(--bg-dark) border border-(--border) text-(--text-primary) font-mono text-sm focus:border-(--accent) focus:outline-none"
+                        className="w-full px-4 py-2.5 rounded-lg bg-(--bg-dark) border border-(--border) text-(--text-primary) tabular-nums text-sm focus:border-(--accent) focus:outline-none"
                       />
                     </div>
                     <div>
@@ -421,7 +421,7 @@ export function NoteModal({ isOpen, onClose, note, type, onSave }: NoteModalProp
                         value={content}
                         onChange={(e) => updateField('content', e.target.value)}
                         rows={showSplit ? 12 : 8}
-                        className="w-full px-4 py-2.5 rounded-lg bg-(--bg-dark) border border-(--border) text-(--text-primary) font-mono text-sm focus:border-(--accent) focus:outline-none resize-y min-h-[180px]"
+                        className="w-full px-4 py-2.5 rounded-lg bg-(--bg-dark) border border-(--border) text-(--text-primary) tabular-nums text-sm focus:border-(--accent) focus:outline-none resize-y min-h-[180px]"
                       />
                     )}
                     {(showPreviewOnly || showSplit) && (
@@ -499,7 +499,7 @@ export function NoteModal({ isOpen, onClose, note, type, onSave }: NoteModalProp
                                 min={1}
                                 value={goalTarget}
                                 onChange={(e) => updateField('goalTarget', e.target.value)}
-                                className="w-24 px-2 py-1 rounded bg-(--bg-dark) border border-(--border) font-mono text-sm"
+                                className="w-24 px-2 py-1 rounded bg-(--bg-dark) border border-(--border) tabular-nums text-sm"
                               />
                               <input
                                 type="text"

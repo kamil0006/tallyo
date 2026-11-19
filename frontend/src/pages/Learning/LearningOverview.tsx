@@ -228,7 +228,7 @@ export function LearningOverview() {
                           <GraduationCap className="w-3.5 h-3.5 text-(--accent-2) shrink-0" />
                           <p className="font-display text-(--text-primary) text-sm truncate">{c.name}</p>
                         </div>
-                        <span className="text-sm font-mono text-(--accent) shrink-0">{c.progress}%</span>
+                        <span className="text-sm tabular-nums text-(--accent) shrink-0">{c.progress}%</span>
                       </div>
                       {c.nextLesson && (
                         <p className="text-sm text-(--text-muted) flex items-center gap-1 pl-5">
@@ -333,7 +333,7 @@ export function LearningOverview() {
                         {s.category && ` · ${s.category}`}
                       </p>
                     </div>
-                    <span className="text-sm font-mono text-(--accent) shrink-0">
+                    <span className="text-sm tabular-nums text-(--accent) shrink-0">
                       {formatMinutes(s.minutes)}
                     </span>
                   </div>

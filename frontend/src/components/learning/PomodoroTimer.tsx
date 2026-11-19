@@ -175,7 +175,7 @@ function PomodoroModal({ onClose }: { onClose: () => void }) {
                       >
                         {isRunning ? t('pomodoro.running') : started ? t('pomodoro.paused') : t('pomodoro.ready')}
                       </span>
-                      <span className="text-xs text-(--text-muted) font-mono mt-0.5">
+                      <span className="text-xs text-(--text-muted) tabular-nums mt-0.5">
                         {t('pomodoro.remainingPercent', { percent: Math.round(progress * 100) })}
                       </span>
                     </>

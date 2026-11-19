@@ -188,7 +188,7 @@ export function Dashboard() {
         className="flex flex-wrap items-end justify-between gap-3"
       >
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-(--text-primary) font-display tracking-wider">
+          <h1 className="font-display text-2xl font-bold tracking-tight text-(--text-primary) sm:text-3xl">
             {t('title')}
           </h1>
           <p className="text-sm sm:text-base text-(--text-muted) mt-1 font-display tracking-wide">
@@ -230,7 +230,7 @@ export function Dashboard() {
             className={`max-md:p-4 ${
               chartFilteredData.balance >= 0
                 ? 'border-(--accent)/20 hover:border-(--accent)/40'
-                : 'border-[#e74c3c]/30 hover:border-[#e74c3c]/50'
+                : 'border-(--danger)/30 hover:border-(--danger)/50'
             }`}
           >
             <p className="truncate text-sm text-(--text-muted) font-display">{t('balance')}</p>
@@ -239,7 +239,7 @@ export function Dashboard() {
               className={`@container mt-1 font-bold font-display leading-tight ${
                 chartFilteredData.balance >= 0
                   ? 'text-(--accent)'
-                  : 'text-[#e74c3c]'
+                  : 'text-(--danger)'
               }`}
             >
               <KpiAmount value={chartFilteredData.balance} sign />

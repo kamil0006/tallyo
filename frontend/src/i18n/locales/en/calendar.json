@@ -1,6 +1,6 @@
 {
   "weekDayShort": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-  "title": "CALENDAR",
+  "title": "Calendar",
   "subtitle": "Your events — the list updates right after saving.",
   "addEvent": "Add event",
   "add": "Add",

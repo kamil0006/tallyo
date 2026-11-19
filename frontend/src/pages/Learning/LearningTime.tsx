@@ -207,7 +207,7 @@ const SessionForm = memo(function SessionForm({
                         onRemoveCategory(cat)
                         if (category === cat) setCategory('')
                       }}
-                      className="transition-colors hover:text-[#e74c3c]"
+                      className="transition-colors hover:text-(--danger)"
                       aria-label={t('common.removeCategoryAria', { name: cat })}
                     >
                       <X className="h-3 w-3" />
@@ -678,7 +678,7 @@ export function LearningTime() {
               }}
             />
           </div>
-          <span className="whitespace-nowrap text-sm font-mono text-(--text-muted)">
+          <span className="whitespace-nowrap text-sm tabular-nums text-(--text-muted)">
             {formatMinutes(weekProgress)} / {formatMinutes(weeklyGoalMinutes)}
           </span>
           <span className="w-10 text-right text-sm font-display text-(--accent)">{goalPercent}%</span>
@@ -759,7 +759,7 @@ export function LearningTime() {
                         )}
                       </div>
                       <p className="text-sm text-(--text-muted)">
-                        <span className="font-mono text-(--accent)">{formatMinutes(s.minutes)}</span>
+                        <span className="tabular-nums text-(--accent)">{formatMinutes(s.minutes)}</span>
                         <span className="ml-2">{s.date}</span>
                         {typeOpt && <span className="ml-2 opacity-60">• {t(`sessionType.${typeOpt.value}`)}</span>}
                         {s.note && <span className="ml-2">• {s.note}</span>}
@@ -776,7 +776,7 @@ export function LearningTime() {
                     </button>
                     <button
                       onClick={() => scheduleDelete(s, s.topic)}
-                      className="flex min-h-11 min-w-11 items-center justify-center rounded-lg text-(--text-muted) transition-colors hover:bg-[#e74c3c]/10 hover:text-[#e74c3c] sm:min-h-0 sm:min-w-0 sm:p-1.5"
+                      className="flex min-h-11 min-w-11 items-center justify-center rounded-lg text-(--text-muted) transition-colors hover:bg-(--danger)/10 hover:text-(--danger) sm:min-h-0 sm:min-w-0 sm:p-1.5"
                       aria-label={t('time.deleteAria')}
                     >
                       <Trash2 className="h-4 w-4" />

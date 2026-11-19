@@ -825,7 +825,7 @@ export function FinancesNetWorth() {
             <p className="text-base text-(--text-muted)">{t('netWorth.netWorthLabel')}</p>
             <p
               className={`mt-1 font-display text-2xl font-bold tabular-nums sm:text-3xl ${
-                accountsNetWorth >= 0 ? 'text-(--accent)' : 'text-[#e74c3c]'
+                accountsNetWorth >= 0 ? 'text-(--accent)' : 'text-(--danger)'
               }`}
             >
               {formatPln(accountsNetWorth)}
@@ -841,7 +841,7 @@ export function FinancesNetWorth() {
             </div>
             <div className="flex justify-between gap-4 border-b border-(--border)/50 pb-2">
               <dt className="text-base text-(--text-muted)">{t('netWorth.liabilitiesLabel')}</dt>
-              <dd className="text-base font-display tabular-nums text-[#e74c3c]">
+              <dd className="text-base font-display tabular-nums text-(--danger)">
                 {liabilitiesTotal > 0 ? `−${formatPln(liabilitiesTotal)}` : formatPln(0)}
               </dd>
             </div>
@@ -849,7 +849,7 @@ export function FinancesNetWorth() {
               <dt className="text-base text-(--text-muted)">{t('netWorth.periodBalance', { period: cumulativePeriodLabel })}</dt>
               <dd
                 className={`text-base font-display tabular-nums ${
-                  cumulativeSavings >= 0 ? 'text-(--positive)' : 'text-[#e74c3c]'
+                  cumulativeSavings >= 0 ? 'text-(--positive)' : 'text-(--danger)'
                 }`}
               >
                 {cumulativeSavings >= 0 ? '+' : ''}
@@ -887,7 +887,7 @@ export function FinancesNetWorth() {
           <button
             type="button"
             onClick={() => setAccountCreateKind('liability')}
-            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-[#e74c3c]/40 bg-[#e74c3c]/15 px-3 py-2.5 text-sm font-display text-[#e74c3c] transition-colors hover:bg-[#e74c3c]/25"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-(--danger)/40 bg-(--danger)/15 px-3 py-2.5 text-sm font-display text-(--danger) transition-colors hover:bg-(--danger)/25"
           >
             <Plus className="h-4 w-4 shrink-0" />
             {t('netWorth.addLiability')}
@@ -911,7 +911,7 @@ export function FinancesNetWorth() {
                         <span className="min-w-0 flex-1 truncate text-base text-(--text-primary)">{account.name}</span>
                       </div>
                       <div className="flex items-center justify-between gap-2 sm:shrink-0">
-                        <span className={`font-mono text-base tabular-nums ${accAccent.amount}`}>
+                        <span className={`text-base tabular-nums ${accAccent.amount}`}>
                           {formatPln(account.balance)}
                         </span>
                         <div className="flex shrink-0 items-center gap-1">
@@ -934,7 +934,7 @@ export function FinancesNetWorth() {
                         <button
                           type="button"
                           onClick={() => quickDeleteApiAccount(account.id)}
-                          className="flex h-9 w-9 items-center justify-center rounded-lg border border-(--border) bg-(--bg-dark) text-(--text-muted) transition-colors hover:border-[#e74c3c]/45 hover:bg-[#e74c3c]/10 hover:text-[#e74c3c]"
+                          className="flex h-9 w-9 items-center justify-center rounded-lg border border-(--border) bg-(--bg-dark) text-(--text-muted) transition-colors hover:border-(--danger)/45 hover:bg-(--danger)/10 hover:text-(--danger)"
                           title={t('netWorth.deleteAssetAria')}
                           aria-label={t('netWorth.deleteAssetAria')}
                         >
@@ -959,7 +959,7 @@ export function FinancesNetWorth() {
                       <span className="min-w-0 flex-1 truncate text-base text-(--text-primary)">{positionLabels[key]}</span>
                     </div>
                     <div className="flex items-center justify-between gap-2 sm:shrink-0">
-                      <span className={`font-mono text-base tabular-nums ${balanceClass}`}>
+                      <span className={`text-base tabular-nums ${balanceClass}`}>
                         {formatPln((netWorthPositions[key] ?? 0))}
                       </span>
                       <button
@@ -982,7 +982,7 @@ export function FinancesNetWorth() {
                       <span className="min-w-0 flex-1 truncate text-base text-(--text-primary)">{a.name}</span>
                     </div>
                     <div className="flex items-center justify-between gap-2 sm:shrink-0">
-                      <span className={`font-mono text-base tabular-nums ${aAccent.amount}`}>
+                      <span className={`text-base tabular-nums ${aAccent.amount}`}>
                         {formatPln(a.balance)}
                       </span>
                       <div className="flex shrink-0 items-center gap-1">
@@ -1005,7 +1005,7 @@ export function FinancesNetWorth() {
                       <button
                         type="button"
                         onClick={() => quickDeleteDemoCustomAsset(a.id)}
-                        className="flex h-9 w-9 items-center justify-center rounded-lg border border-(--border) bg-(--bg-dark) text-(--text-muted) transition-colors hover:border-[#e74c3c]/45 hover:bg-[#e74c3c]/10 hover:text-[#e74c3c]"
+                        className="flex h-9 w-9 items-center justify-center rounded-lg border border-(--border) bg-(--bg-dark) text-(--text-muted) transition-colors hover:border-(--danger)/45 hover:bg-(--danger)/10 hover:text-(--danger)"
                         title={t('netWorth.deleteAssetAria')}
                         aria-label={t('netWorth.deleteAssetAria')}
                       >
@@ -1031,11 +1031,11 @@ export function FinancesNetWorth() {
                     return (
                     <li key={account.id} className="flex flex-col gap-2 px-3 py-3 sm:flex-row sm:items-center sm:gap-2 sm:py-2">
                       <div className="flex min-w-0 flex-1 items-center gap-2">
-                        <LiIcon className="h-4 w-4 shrink-0 text-[#e74c3c]/90" aria-hidden />
+                        <LiIcon className="h-4 w-4 shrink-0 text-(--danger)/90" aria-hidden />
                         <span className="min-w-0 flex-1 truncate text-base text-(--text-primary)">{account.name}</span>
                       </div>
                       <div className="flex items-center justify-between gap-2 sm:shrink-0">
-                        <span className="font-mono text-base tabular-nums text-[#e74c3c]">
+                        <span className="text-base tabular-nums text-(--danger)">
                           −{formatPln(account.balance)}
                         </span>
                         <div className="flex shrink-0 items-center gap-1">
@@ -1050,14 +1050,14 @@ export function FinancesNetWorth() {
                               iconKey: account.iconKey,
                             })
                           }
-                          className="rounded-lg border border-(--border) bg-(--bg-dark) px-2.5 py-1.5 text-sm font-display text-(--text-muted) transition-colors hover:border-rose-400/40 hover:text-[#e74c3c]"
+                          className="rounded-lg border border-(--border) bg-(--bg-dark) px-2.5 py-1.5 text-sm font-display text-(--text-muted) transition-colors hover:border-rose-400/40 hover:text-(--danger)"
                         >
                           {t('netWorth.edit')}
                         </button>
                         <button
                           type="button"
                           onClick={() => quickDeleteApiAccount(account.id)}
-                          className="flex h-9 w-9 items-center justify-center rounded-lg border border-(--border) bg-(--bg-dark) text-(--text-muted) transition-colors hover:border-[#e74c3c]/45 hover:bg-[#e74c3c]/10 hover:text-[#e74c3c]"
+                          className="flex h-9 w-9 items-center justify-center rounded-lg border border-(--border) bg-(--bg-dark) text-(--text-muted) transition-colors hover:border-(--danger)/45 hover:bg-(--danger)/10 hover:text-(--danger)"
                           title={t('netWorth.deleteLiabilityAria')}
                           aria-label={t('netWorth.deleteLiabilityAria')}
                         >
@@ -1079,11 +1079,11 @@ export function FinancesNetWorth() {
                   return (
                   <li key={l.id} className="flex flex-col gap-2 px-3 py-3 sm:flex-row sm:items-center sm:gap-2 sm:py-2">
                     <div className="flex min-w-0 flex-1 items-center gap-2">
-                      <DemoLiIcon className="h-4 w-4 shrink-0 text-[#e74c3c]/90" aria-hidden />
+                      <DemoLiIcon className="h-4 w-4 shrink-0 text-(--danger)/90" aria-hidden />
                       <span className="min-w-0 flex-1 truncate text-base text-(--text-primary)">{l.name}</span>
                     </div>
                     <div className="flex items-center justify-between gap-2 sm:shrink-0">
-                      <span className="font-mono text-base tabular-nums text-[#e74c3c]">
+                      <span className="text-base tabular-nums text-(--danger)">
                         −{formatPln(l.balance)}
                       </span>
                       <div className="flex shrink-0 items-center gap-1">
@@ -1098,14 +1098,14 @@ export function FinancesNetWorth() {
                             iconKey: l.iconKey,
                           })
                         }
-                        className="rounded-lg border border-(--border) bg-(--bg-dark) px-2.5 py-1.5 text-sm font-display text-(--text-muted) transition-colors hover:border-rose-400/40 hover:text-[#e74c3c]"
+                        className="rounded-lg border border-(--border) bg-(--bg-dark) px-2.5 py-1.5 text-sm font-display text-(--text-muted) transition-colors hover:border-rose-400/40 hover:text-(--danger)"
                       >
                         {t('netWorth.edit')}
                       </button>
                       <button
                         type="button"
                         onClick={() => quickDeleteDemoLiability(l.id)}
-                        className="flex h-9 w-9 items-center justify-center rounded-lg border border-(--border) bg-(--bg-dark) text-(--text-muted) transition-colors hover:border-[#e74c3c]/45 hover:bg-[#e74c3c]/10 hover:text-[#e74c3c]"
+                        className="flex h-9 w-9 items-center justify-center rounded-lg border border-(--border) bg-(--bg-dark) text-(--text-muted) transition-colors hover:border-(--danger)/45 hover:bg-(--danger)/10 hover:text-(--danger)"
                         title={t('netWorth.deleteLiabilityAria')}
                         aria-label={t('netWorth.deleteLiabilityAria')}
                       >
@@ -1231,7 +1231,7 @@ export function FinancesNetWorth() {
                     </div>
                     <div className="flex shrink-0 items-center gap-2">
                       <div className="text-right">
-                        <p className={`font-mono text-sm ${row.amount >= 0 ? 'text-(--positive)' : 'text-[#e74c3c]'}`}>
+                        <p className={`tabular-nums text-sm ${row.amount >= 0 ? 'text-(--positive)' : 'text-(--danger)'}`}>
                           {row.amount >= 0 ? '+' : ''}
                           {formatPln(row.amount)}
                         </p>
@@ -1251,7 +1251,7 @@ export function FinancesNetWorth() {
                       <button
                         type="button"
                         onClick={() => quickDeleteApiAdjustment(row)}
-                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg p-1.5 text-(--text-muted) transition-colors hover:bg-[#e74c3c]/15 hover:text-[#e74c3c]"
+                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg p-1.5 text-(--text-muted) transition-colors hover:bg-(--danger)/15 hover:text-(--danger)"
                         title={t('netWorth.deleteAdjustmentAria')}
                         aria-label={t('netWorth.deleteAdjustmentAria')}
                       >
@@ -1276,7 +1276,7 @@ export function FinancesNetWorth() {
                     </div>
                     <div className="flex shrink-0 items-center gap-2">
                       <div className="text-right">
-                        <p className={`font-mono text-sm ${row.amount >= 0 ? 'text-(--positive)' : 'text-[#e74c3c]'}`}>
+                        <p className={`tabular-nums text-sm ${row.amount >= 0 ? 'text-(--positive)' : 'text-(--danger)'}`}>
                           {row.amount >= 0 ? '+' : ''}
                           {formatPln(row.amount)}
                         </p>
@@ -1294,7 +1294,7 @@ export function FinancesNetWorth() {
                       <button
                         type="button"
                         onClick={() => quickDeleteDemoAdjustment(row)}
-                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg p-1.5 text-(--text-muted) transition-colors hover:bg-[#e74c3c]/15 hover:text-[#e74c3c]"
+                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg p-1.5 text-(--text-muted) transition-colors hover:bg-(--danger)/15 hover:text-(--danger)"
                         title={t('netWorth.deleteAdjustmentAria')}
                         aria-label={t('netWorth.deleteAdjustmentAria')}
                       >
