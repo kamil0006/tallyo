@@ -127,7 +127,13 @@ export function AppNavPanel({ onNavigate, mobileClose }: AppNavPanelProps) {
           )}
         </div>
       </div>
-      <nav className="scrollbar-hidden min-h-0 flex-1 space-y-7 overflow-y-auto overflow-x-hidden p-5">
+      {/* Desktop: only the links scroll. Mobile drawer: the whole panel scrolls (see MobileDrawer),
+          so the footer never covers the links on short screens. */}
+      <nav
+        className={`space-y-7 p-5 ${
+          mobileClose ? 'flex-1 shrink-0' : 'scrollbar-hidden min-h-0 flex-1 overflow-y-auto overflow-x-hidden'
+        }`}
+      >
         {navSections.map((section) => (
           <div key={section.labelKey ?? 'dashboard'}>
             {section.labelKey && (
@@ -157,7 +163,7 @@ export function AppNavPanel({ onNavigate, mobileClose }: AppNavPanelProps) {
           </div>
         ))}
       </nav>
-      <div className="space-y-3 border-t border-(--border) p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
+      <div className="flex shrink-0 items-center gap-3 border-t border-(--border) p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
         <Tooltip content={t('settingsTooltip')} align="start">
           <button
             type="button"
@@ -165,39 +171,26 @@ export function AppNavPanel({ onNavigate, mobileClose }: AppNavPanelProps) {
               openSettings()
               onNavigate?.()
             }}
-            className="grid size-11 place-items-center rounded-lg border border-(--border) bg-(--bg-dark) p-0 text-(--text-muted) transition-colors hover:border-(--accent)/50 hover:text-(--accent)"
+            className="grid size-11 shrink-0 place-items-center rounded-lg border border-(--border) bg-(--bg-dark) p-0 text-(--text-muted) transition-colors hover:border-(--accent)/50 hover:text-(--accent)"
             aria-label={t('settingsAria')}
           >
             <Settings className="size-[18px] shrink-0 text-current [stroke-linecap:round] [stroke-linejoin:round]" strokeWidth={2} aria-hidden />
           </button>
         </Tooltip>
-        {isDemoMode ? (
-          <>
-            <p className="text-sm text-(--text-muted) font-mono">{t('demoLabel')}</p>
-            <button
-              type="button"
-              onClick={handleLogout}
-              className="flex min-h-[44px] items-center gap-2 text-sm text-(--text-muted) transition-colors hover:text-(--accent)"
-            >
-              <LogOut className="h-3 w-3" />
-              {t('exitDemo')}
-            </button>
-          </>
-        ) : (
-          <>
-            <p className="truncate text-sm text-(--text-muted)" title={user?.email}>
-              {user?.email}
-            </p>
-            <button
-              type="button"
-              onClick={handleLogout}
-              className="flex min-h-[44px] items-center gap-2 text-sm text-(--text-muted) transition-colors hover:text-(--accent)"
-            >
-              <LogOut className="h-3 w-3" />
-              {t('logout')}
-            </button>
-          </>
-        )}
+        <p
+          className="line-clamp-2 min-w-0 flex-1 text-sm leading-snug text-(--text-muted) [overflow-wrap:anywhere]"
+          title={isDemoMode ? t('demoLabel') : user?.email}
+        >
+          {isDemoMode ? t('demoLabel') : user?.email}
+        </p>
+        <button
+          type="button"
+          onClick={handleLogout}
+          className="flex min-h-11 shrink-0 items-center gap-1.5 rounded-lg px-2 text-sm text-(--text-muted) transition-colors hover:text-(--accent)"
+        >
+          <LogOut className="h-3.5 w-3.5" />
+          {isDemoMode ? t('exitDemo') : t('logout')}
+        </button>
       </div>
     </>
   )
