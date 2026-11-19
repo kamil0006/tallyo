@@ -13,6 +13,7 @@ import { GlobalQuickTodo } from './GlobalQuickTodo'
 import { Onboarding } from './Onboarding'
 import { SettingsModal } from './SettingsModal'
 import { GlobalPomodoro } from './learning/PomodoroTimer'
+import { usePomodoro } from '../context/PomodoroContext'
 
 interface LayoutProps {
   children: ReactNode
@@ -22,6 +23,8 @@ export function Layout({ children }: LayoutProps) {
   const { pathname } = useLocation()
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
   const sectionKey = pathname.split('/').filter(Boolean)[0] || 'dashboard'
+  // Leave room at the bottom so the floating timer indicator never covers the last row of a page.
+  const timerIndicatorShown = usePomodoro().status !== 'idle'
 
   useEffect(() => {
     setMobileNavOpen(false)
@@ -42,7 +45,13 @@ export function Layout({ children }: LayoutProps) {
       <div className="flex min-h-0 min-w-0 flex-1 flex-col">
         <MobileHeader onMenuClick={() => setMobileNavOpen(true)} />
         <div className="mobile-header-spacer lg:hidden" aria-hidden="true" />
-        <main className="scrollbar-hidden relative min-w-0 flex-1 overflow-x-hidden overflow-y-auto px-4 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-4 sm:px-6 lg:p-10">
+        <main
+          className={`scrollbar-hidden relative min-w-0 flex-1 overflow-x-hidden overflow-y-auto px-4 pt-4 sm:px-6 lg:p-10 ${
+            timerIndicatorShown
+              ? 'pb-[calc(5rem+env(safe-area-inset-bottom))] lg:pb-24'
+              : 'pb-[max(1.5rem,env(safe-area-inset-bottom))]'
+          }`}
+        >
           <motion.div
             key={sectionKey}
             initial={{ opacity: 0, y: 8 }}
