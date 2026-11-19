@@ -69,7 +69,7 @@ function StatusBadge({ status }: { status: ReadingStatus }) {
 function StarRating({ rating }: { rating?: number }) {
   if (!rating) return null
   return (
-    <span className="text-xs text-(--warning) font-mono">
+    <span className="text-xs text-(--warning) tabular-nums">
       {'★'.repeat(rating)}{'☆'.repeat(5 - rating)}
     </span>
   )
@@ -223,7 +223,7 @@ const BookAddForm = memo(function BookAddForm({
                         onRemoveCategory(cat)
                         if (category === cat) setCategory('')
                       }}
-                      className="transition-colors hover:text-[#e74c3c]"
+                      className="transition-colors hover:text-(--danger)"
                       aria-label={t('common.removeCategoryAria', { name: cat })}
                     >
                       <X className="h-3.5 w-3.5" />
@@ -286,7 +286,7 @@ const BookAddForm = memo(function BookAddForm({
                     const v = e.target.value.replace(/\D/g, '')
                     if (v === '' || (parseInt(v, 10) >= 1 && parseInt(v, 10) <= 5)) setRating(v)
                   }}
-                  className={learningFieldClass + ' font-mono'}
+                  className={learningFieldClass + ' tabular-nums'}
                 />
               </div>
             </>

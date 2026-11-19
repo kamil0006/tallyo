@@ -2077,7 +2077,7 @@ export function Habits() {
   return (
     <div className="space-y-6 sm:space-y-8">
       <div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-(--text-primary) font-display tracking-wider">
+        <h1 className="font-display text-2xl font-bold tracking-tight text-(--text-primary) sm:text-3xl">
           {t('header.title')}
         </h1>
         <p className="text-base text-(--text-muted) mt-1 font-display tracking-wide">

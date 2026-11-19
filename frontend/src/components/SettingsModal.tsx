@@ -202,7 +202,7 @@ export function SettingsModal() {
                 />
               </div>
 
-              {error && <p className="text-sm text-[#e74c3c]">{error}</p>}
+              {error && <p className="text-sm text-(--danger)">{error}</p>}
               {successMsg && <p className="text-sm text-(--positive,#2ecc71)">{successMsg}</p>}
             </div>
           )}

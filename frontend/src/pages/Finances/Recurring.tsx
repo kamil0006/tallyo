@@ -225,7 +225,7 @@ export function Recurring() {
                           </span>
                         ) : null}
                       </p>
-                      <p className="mt-1.5 font-mono text-lg tabular-nums leading-none text-(--warning)">
+                      <p className="mt-1.5 text-lg tabular-nums leading-none text-(--warning)">
                         {s.currency && s.currency !== 'PLN' && s.originalAmount != null ? (
                           <>
                             −{formatCurrencyAmount(s.originalAmount, s.currency)}{' '}

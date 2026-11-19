@@ -186,11 +186,11 @@ export function Overview() {
             {formatPln(expensesTotal)}
           </p>
         </Card>
-        <Card className={currentTotal >= 0 ? 'border-(--accent)/20' : 'border-[#e74c3c]/30'} animateEntrance={false}>
+        <Card className={currentTotal >= 0 ? 'border-(--accent)/20' : 'border-(--danger)/30'} animateEntrance={false}>
           <p className="text-base text-(--text-muted)">{t('overview.balance')}</p>
           <p
             className={`mt-1 text-2xl font-bold font-display ${
-              currentTotal >= 0 ? 'text-(--accent)' : 'text-[#e74c3c]'
+              currentTotal >= 0 ? 'text-(--accent)' : 'text-(--danger)'
             }`}
           >
             {currentTotal >= 0 ? '+' : ''}{formatPln(currentTotal)}
@@ -208,7 +208,7 @@ export function Overview() {
                 <p className="text-base text-(--text-muted)">{t('overview.balance')}</p>
                 <p
                   className={`mt-1 text-2xl font-bold font-display tabular-nums @5xl:text-3xl ${
-                    currentTotal >= 0 ? 'text-(--accent)' : 'text-[#e74c3c]'
+                    currentTotal >= 0 ? 'text-(--accent)' : 'text-(--danger)'
                   }`}
                 >
                   {currentTotal >= 0 ? '+' : ''}
@@ -231,7 +231,7 @@ export function Overview() {
               </dl>
               <p className="md:hidden rounded-lg border border-(--border)/60 bg-(--bg-dark)/40 px-3 py-2 text-sm text-(--text-muted)">
                 {t('overview.vsPrevMonth', { month: prevMonthName })}{' '}
-                <span className={changePercent >= 0 ? 'text-(--positive)' : 'text-[#e74c3c]'}>
+                <span className={changePercent >= 0 ? 'text-(--positive)' : 'text-(--danger)'}>
                   {changePercent >= 0 ? '+' : ''}
                   {changePercent}%
                 </span>{' '}
@@ -245,7 +245,7 @@ export function Overview() {
                 <p className="text-base text-(--text-muted)">{t('overview.balance')}</p>
                 <p
                   className={`mt-1 text-2xl font-bold font-display tabular-nums @5xl:text-3xl ${
-                    previousTotal >= 0 ? 'text-(--text-primary)' : 'text-[#e74c3c]'
+                    previousTotal >= 0 ? 'text-(--text-primary)' : 'text-(--danger)'
                   }`}
                 >
                   {previousTotal >= 0 ? '+' : ''}
@@ -273,7 +273,7 @@ export function Overview() {
                 <p className="text-base text-(--text-muted)">{t('overview.balanceChange')}</p>
                 <p
                   className={`mt-1 text-2xl font-bold font-display tabular-nums @5xl:text-3xl ${
-                    changePercent >= 0 ? 'text-(--positive)' : 'text-[#e74c3c]'
+                    changePercent >= 0 ? 'text-(--positive)' : 'text-(--danger)'
                   }`}
                 >
                   {changePercent >= 0 ? '+' : ''}
@@ -285,7 +285,7 @@ export function Overview() {
                   <dt className="text-base text-(--text-muted)">{t('overview.differenceAmount')}</dt>
                   <dd
                     className={`text-right text-lg font-semibold tabular-nums font-display ${
-                      balanceDeltaZloty >= 0 ? 'text-(--positive)' : 'text-[#e74c3c]'
+                      balanceDeltaZloty >= 0 ? 'text-(--positive)' : 'text-(--danger)'
                     }`}
                   >
                     {balanceDeltaZloty >= 0 ? '+' : ''}
@@ -296,7 +296,7 @@ export function Overview() {
                   <dt className="text-base text-(--text-muted)">{t('overview.incomeChange')}</dt>
                   <dd
                     className={`text-right text-base font-medium tabular-nums ${
-                      currentIncomeForTrend - previousIncomeForTrend >= 0 ? 'text-(--positive)' : 'text-[#e74c3c]'
+                      currentIncomeForTrend - previousIncomeForTrend >= 0 ? 'text-(--positive)' : 'text-(--danger)'
                     }`}
                   >
                     {currentIncomeForTrend - previousIncomeForTrend >= 0 ? '+' : ''}
@@ -307,7 +307,7 @@ export function Overview() {
                   <dt className="text-base text-(--text-muted)">{t('overview.expensesChange')}</dt>
                   <dd
                     className={`text-right text-base font-medium tabular-nums ${
-                      currentExpensesForTrend - previousExpensesForTrend <= 0 ? 'text-(--positive)' : 'text-[#e74c3c]'
+                      currentExpensesForTrend - previousExpensesForTrend <= 0 ? 'text-(--positive)' : 'text-(--danger)'
                     }`}
                   >
                     {currentExpensesForTrend - previousExpensesForTrend >= 0 ? '+' : ''}
@@ -323,13 +323,13 @@ export function Overview() {
       <motion.div variants={getOverviewTileVariants(reduceMotion, 3)} className="grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
         <Card className="border-(--accent)/20" animateEntrance={false}>
           <p className="text-base text-(--text-muted)">{t('overview.availableUntilMonthEnd')}</p>
-          <p className={`text-2xl font-bold mt-1 font-display ${availableUntilMonthEnd >= 0 ? 'text-(--accent)' : 'text-[#e74c3c]'}`}>
+          <p className={`text-2xl font-bold mt-1 font-display ${availableUntilMonthEnd >= 0 ? 'text-(--accent)' : 'text-(--danger)'}`}>
             {formatPln(availableUntilMonthEnd)}
           </p>
         </Card>
         <Card className="border-(--warning)/20" animateEntrance={false}>
           <p className="text-base text-(--text-muted)">{t('overview.dailyBudget')}</p>
-          <p className={`text-2xl font-bold mt-1 font-display ${dailyBudget >= 0 ? 'text-(--warning)' : 'text-[#e74c3c]'}`}>
+          <p className={`text-2xl font-bold mt-1 font-display ${dailyBudget >= 0 ? 'text-(--warning)' : 'text-(--danger)'}`}>
             {formatPln(Math.round(dailyBudget))}
           </p>
         </Card>
@@ -351,7 +351,7 @@ export function Overview() {
                   {item.name} · {t('overview.dayOfMonth', { day: item.dayOfMonth })}
                   {item.isNextMonth ? ` ${t('overview.nextMonthSuffix')}` : ''}
                 </span>
-                <span className="font-mono text-sm tabular-nums text-(--warning)">
+                <span className="text-sm tabular-nums text-(--warning)">
                   {formatPln(item.amount)}
                 </span>
               </div>

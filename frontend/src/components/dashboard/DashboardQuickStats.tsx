@@ -53,7 +53,7 @@ export function DashboardQuickStats({
                       >
                         {ev.title}
                       </Link>
-                      <p className="text-xs text-(--text-muted) font-mono">
+                      <p className="text-xs text-(--text-muted) tabular-nums">
                         {formatEventDate(ev.date, locale)} {ev.time && `• ${ev.time}`}
                       </p>
                     </div>
@@ -103,7 +103,7 @@ export function DashboardQuickStats({
                             style={{ width: `${pct}%` }}
                           />
                         </div>
-                        <span className="text-sm text-(--text-muted) shrink-0 font-mono">
+                        <span className="text-sm text-(--text-muted) shrink-0 tabular-nums">
                           {formatNumberPl(g.current)}/{formatNumberPl(g.target)} {g.unit ?? ''}
                         </span>
                       </div>

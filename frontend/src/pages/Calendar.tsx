@@ -346,7 +346,7 @@ export function Calendar() {
         className="flex items-end justify-between gap-3"
       >
         <div className="min-w-0">
-          <h1 className="text-2xl sm:text-3xl font-bold text-(--text-primary) font-display tracking-wider">
+          <h1 className="font-display text-2xl font-bold tracking-tight text-(--text-primary) sm:text-3xl">
             {t('title')}
           </h1>
           <p className="text-sm sm:text-base text-(--text-muted) mt-1 font-display tracking-wide">
@@ -588,7 +588,7 @@ export function Calendar() {
                     </button>
                   </div>
                   {holiday && (
-                    <p className="text-xs font-mono mb-2" style={{ color: '#e57373' }}>{holiday}</p>
+                    <p className="text-xs tabular-nums mb-2" style={{ color: 'var(--danger)' }}>{holiday}</p>
                   )}
                   {items.length === 0 ? (
                     <p className="text-sm text-(--text-muted)">{t('noEntries')}</p>
@@ -662,7 +662,7 @@ export function Calendar() {
                       {date.getDate()}
                     </span>
                     {holiday && (
-                      <span className="text-xs font-mono" style={{ color: '#e57373' }} title={holiday}>
+                      <span className="text-xs tabular-nums" style={{ color: 'var(--danger)' }} title={holiday}>
                         {holiday}
                       </span>
                     )}
@@ -746,7 +746,7 @@ export function Calendar() {
                   key={key}
                   className={`relative aspect-square p-1 bg-(--bg-card) flex flex-col items-center ${
                     !isCurrentMonth ? 'opacity-40' : 'active:bg-(--bg-card-hover)'
-                  } ${holiday ? 'ring-1 ring-inset ring-[#e57373]/40' : ''}`}
+                  } ${holiday ? 'ring-1 ring-inset ring-(--danger)/40' : ''}`}
                   onClick={() => handleDayClick(key, dayEvents, dayTodos, isCurrentMonth)}
                 >
                   <span
@@ -788,8 +788,8 @@ export function Calendar() {
                   </span>
                   {holiday && (
                     <span
-                      className="text-[11px] font-mono truncate max-w-[65px] block"
-                      style={{ color: '#e57373' }}
+                      className="text-[11px] tabular-nums truncate max-w-[65px] block"
+                      style={{ color: 'var(--danger)' }}
                       title={holiday}
                     >
                       {holiday}
@@ -901,7 +901,7 @@ export function Calendar() {
             </div>
           </div>
           <div className="flex items-center gap-2 pt-1">
-            <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: '#e57373' }} />
+            <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: 'var(--danger)' }} />
             <span className="text-sm">{t('publicHoliday')}</span>
           </div>
         </div>

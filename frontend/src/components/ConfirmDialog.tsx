@@ -100,7 +100,7 @@ export function ConfirmDialog({
           disabled={busy}
           className={`w-full rounded-lg border py-2.5 font-display transition-colors disabled:opacity-50 sm:min-w-28 sm:w-auto ${
             danger
-              ? 'border-[#e74c3c]/50 bg-[#e74c3c]/15 text-[#e74c3c] hover:bg-[#e74c3c]/25'
+              ? 'border-(--danger)/50 bg-(--danger)/15 text-(--danger) hover:bg-(--danger)/25'
               : 'border-(--accent)/45 bg-(--accent)/15 text-(--accent) hover:bg-(--accent)/25'
           }`}
         >

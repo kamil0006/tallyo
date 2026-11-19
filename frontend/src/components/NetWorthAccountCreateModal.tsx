@@ -145,7 +145,7 @@ export function NetWorthAccountCreateModal({ isOpen, onClose, kind, onSubmit }: 
                             selected
                               ? resolvedKind === 'asset'
                                 ? 'border-(--accent)/55 bg-(--accent)/20 text-(--accent)'
-                                : 'border-[#e74c3c]/50 bg-[#e74c3c]/15 text-[#e74c3c]'
+                                : 'border-(--danger)/50 bg-(--danger)/15 text-(--danger)'
                               : 'border-(--border) bg-(--bg-dark) text-(--text-muted) hover:border-(--accent)/35 hover:text-(--text-primary)'
                           }`}
                         >
@@ -194,7 +194,7 @@ export function NetWorthAccountCreateModal({ isOpen, onClose, kind, onSubmit }: 
                     value={balanceStr}
                     onChange={(e) => setBalanceStr(e.target.value.replace(/[^0-9,.]/g, ''))}
                     placeholder={t('netWorthAccountCreateModal.balancePlaceholder')}
-                    className="w-full px-3 py-2.5 rounded-lg bg-(--bg-dark) border border-(--border) text-(--text-primary) text-base font-mono focus:border-(--accent) focus:outline-none"
+                    className="w-full px-3 py-2.5 rounded-lg bg-(--bg-dark) border border-(--border) text-(--text-primary) text-base tabular-nums focus:border-(--accent) focus:outline-none"
                   />
                 </div>
                 <p className="text-base text-(--text-muted)">
@@ -215,7 +215,7 @@ export function NetWorthAccountCreateModal({ isOpen, onClose, kind, onSubmit }: 
                     className={`flex-1 py-2.5 rounded-lg font-display font-medium transition-colors ${
                       resolvedKind === 'asset'
                         ? 'bg-(--accent)/20 text-(--accent) border border-(--accent)/45 hover:bg-(--accent)/30'
-                        : 'bg-[#e74c3c]/15 text-[#e74c3c] border border-[#e74c3c]/45 hover:bg-[#e74c3c]/25'
+                        : 'bg-(--danger)/15 text-(--danger) border border-(--danger)/45 hover:bg-(--danger)/25'
                     }`}
                   >
                     {submitLabel}

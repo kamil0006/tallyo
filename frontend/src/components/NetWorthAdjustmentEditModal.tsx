@@ -81,7 +81,7 @@ export function NetWorthAdjustmentEditModal({
                     inputMode="decimal"
                     value={amountStr}
                     onChange={(e) => setAmountStr(e.target.value.replace(/[^0-9,.-]/g, ''))}
-                    className="w-full rounded-lg border border-(--border) bg-(--bg-dark) px-3 py-2.5 font-mono text-base text-(--text-primary) focus:border-(--accent) focus:outline-none"
+                    className="w-full rounded-lg border border-(--border) bg-(--bg-dark) px-3 py-2.5 tabular-nums text-base text-(--text-primary) focus:border-(--accent) focus:outline-none"
                   />
                 </div>
                 <div>
@@ -99,7 +99,7 @@ export function NetWorthAdjustmentEditModal({
                   <button
                     type="button"
                     onClick={handleDeleteClick}
-                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-[#e74c3c]/45 bg-[#e74c3c]/15 py-2.5 font-display text-[#e74c3c] transition-colors hover:bg-[#e74c3c]/25"
+                    className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-(--danger)/45 bg-(--danger)/15 py-2.5 font-display text-(--danger) transition-colors hover:bg-(--danger)/25"
                   >
                     <Trash2 className="h-4 w-4" />
                     {t('netWorthAdjustmentEditModal.deleteEntryButton')}

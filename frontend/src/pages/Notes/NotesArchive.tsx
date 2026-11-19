@@ -147,7 +147,7 @@ export function NotesArchive() {
                       <button
                         type="button"
                         onClick={() => setNotePendingPermanentDelete(note)}
-                        className="rounded-lg p-2 text-(--text-muted) transition-colors hover:bg-(--bg-dark) hover:text-[#e74c3c]"
+                        className="rounded-lg p-2 text-(--text-muted) transition-colors hover:bg-(--bg-dark) hover:text-(--danger)"
                         aria-label={t('archive.deletePermanently')}
                       >
                         <Trash2 className="h-4 w-4" />

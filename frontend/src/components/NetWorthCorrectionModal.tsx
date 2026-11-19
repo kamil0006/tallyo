@@ -149,7 +149,7 @@ export function NetWorthCorrectionModal({
                             selected
                               ? account.kind === 'asset'
                                 ? 'border-(--accent)/55 bg-(--accent)/20 text-(--accent)'
-                                : 'border-[#e74c3c]/50 bg-[#e74c3c]/15 text-[#e74c3c]'
+                                : 'border-(--danger)/50 bg-(--danger)/15 text-(--danger)'
                               : 'border-(--border) bg-(--bg-dark) text-(--text-muted) hover:border-(--accent)/35 hover:text-(--text-primary)'
                           }`}
                         >
@@ -200,13 +200,13 @@ export function NetWorthCorrectionModal({
                     value={amountStr}
                     onChange={(e) => setAmountStr(e.target.value.replace(/[^0-9,.-]/g, ''))}
                     placeholder={t('netWorthCorrectionModal.amountPlaceholder')}
-                    className="w-full px-3 py-2.5 rounded-lg bg-(--bg-dark) border border-(--border) text-(--text-primary) text-base font-mono focus:border-(--accent) focus:outline-none"
+                    className="w-full px-3 py-2.5 rounded-lg bg-(--bg-dark) border border-(--border) text-(--text-primary) text-base tabular-nums focus:border-(--accent) focus:outline-none"
                   />
                 </div>
                 {preview != null && !Number.isNaN(preview) && (
                   <div className="rounded-lg border border-(--border) bg-(--bg-dark)/50 px-3 py-2">
                     <p className="text-base text-(--text-muted) font-display">{t('netWorthCorrectionModal.afterCorrectionLabel')}</p>
-                    <p className="text-base font-mono text-(--text-primary) mt-0.5">
+                    <p className="text-base tabular-nums text-(--text-primary) mt-0.5">
                       {t('netWorth.balanceArrow', { from: formatNumberPl(currentBalance), to: formatNumberPl(preview) })}
                     </p>
                   </div>
