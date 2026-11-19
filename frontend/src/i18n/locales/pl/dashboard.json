@@ -40,15 +40,5 @@
   "habitsCount_one": "{{count}} nawyk",
   "habitsCount_few": "{{count}} nawyki",
   "habitsCount_many": "{{count}} nawyków",
-  "habitsCount_other": "{{count}} nawyków",
-  "aiReport": {
-    "title": "Asystent AI — raport tygodniowy",
-    "generating": "Generuję…",
-    "refresh": "Odśwież raport",
-    "generate": "Wygeneruj raport",
-    "error": "Nie udało się wygenerować raportu",
-    "description": "Wygeneruj zwięzłe podsumowanie ostatniego tygodnia: finanse, produktywność, nawyki i nauka — z sugestiami następnych kroków.",
-    "generatedByAi": "Wygenerowano przez AI ({{model}})",
-    "localReport": "Raport lokalny (bez AI)"
-  }
+  "habitsCount_other": "{{count}} nawyków"
 }

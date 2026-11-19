@@ -34,7 +34,6 @@ import { DashboardSkeleton } from '../components/skeletons'
 import { buildTransactionsDrilldownSearch } from '../lib/buildDrilldownSearch'
 import { DashboardQuickStats } from '../components/dashboard/DashboardQuickStats'
 import { DashboardQuickLinks } from '../components/dashboard/DashboardQuickLinks'
-import { AiWeeklyReport } from '../components/dashboard/AiWeeklyReport'
 import { useIsMobile } from '../hooks/useIsMobile'
 import { formatPln, formatPlnCompact, formatNumberPl, formatNumberCompactPl } from '../lib/currency'
 
@@ -396,10 +395,6 @@ export function Dashboard() {
         </motion.div>
       </div>
 
-      {/* Asystent AI – raport tygodniowy */}
-      <motion.div variants={getDashboardTileVariants(reduceMotion, 6)} className="min-w-0">
-        <AiWeeklyReport />
-      </motion.div>
 
       {/* Upcoming events + Quick stats – extended grid */}
       <DashboardQuickStats

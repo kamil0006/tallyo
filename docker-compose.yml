@@ -35,7 +35,7 @@ services:
       NODE_ENV: development
       PORT: 3002
       FRONTEND_URL: http://localhost:8080
-      # JWT_SECRET / ENCRYPTION_* / OPENAI_* can be passed here or via an
+      # JWT_SECRET / ENCRYPTION_* can be passed here or via an
       # env_file when needed; development mode falls back to a dev secret.
     depends_on:
       db:
