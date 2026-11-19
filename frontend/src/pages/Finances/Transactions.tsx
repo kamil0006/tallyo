@@ -514,7 +514,7 @@ export function Transactions() {
             return (
               <article
                 key={`${tx.type}-${tx.id}-mobile`}
-                className="rounded-lg border border-(--border)/80 bg-(--bg-card)/25 p-3.5"
+                className="rounded-lg border border-(--border)/80 bg-(--bg-card)/25 p-3.5 even:bg-white/[0.035]"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0 flex-1">
