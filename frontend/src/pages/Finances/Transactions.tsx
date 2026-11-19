@@ -422,12 +422,12 @@ export function Transactions() {
           <table className="w-full text-left">
             <thead>
               <tr className="border-b border-(--border)">
-                <th className="pb-3 text-base text-(--text-muted)">{t('transactions.colDate')}</th>
+                <th className="pb-3 pl-3 text-base text-(--text-muted)">{t('transactions.colDate')}</th>
                 <th className="pb-3 text-base text-(--text-muted)">{t('transactions.colName')}</th>
                 <th className="pb-3 pr-10 text-base text-(--text-muted)">{t('transactions.colCategory')}</th>
                 <th className="pb-3 text-base text-(--text-muted)">{t('transactions.colPayment')}</th>
                 <th className="pb-3 text-base text-(--text-muted) text-right">{t('transactions.colAmount')}</th>
-                <th className="pb-3 w-20" />
+                <th className="pb-3 pr-2 w-20" />
               </tr>
             </thead>
             <tbody key={`${selectedMonth}-${selectedYear}-desktop`}>
@@ -438,9 +438,9 @@ export function Transactions() {
                 return (
                   <tr
                     key={`${tx.type}-${tx.id}`}
-                    className="border-b border-(--border)/50 hover:bg-(--bg-dark)/50"
+                    className="border-b border-(--border)/50 transition-colors even:bg-white/[0.035] hover:bg-white/[0.07]"
                   >
-                    <td className="py-3 pr-4 text-base whitespace-nowrap tabular-nums text-(--text-primary)" title={tx.date}>
+                    <td className="py-3 pl-3 pr-4 text-base whitespace-nowrap tabular-nums text-(--text-primary)" title={tx.date}>
                       {formatTxDate(tx.date, i18n.language === 'pl' ? 'pl-PL' : 'en-US')}
                     </td>
                     <td className="w-full py-3 pr-4 text-base font-medium text-(--text-primary) [overflow-wrap:anywhere]">{capitalizeFirstPl(tx.name)}</td>
@@ -473,7 +473,7 @@ export function Transactions() {
                         </span>
                       )}
                     </td>
-                    <td className="py-3 whitespace-nowrap">
+                    <td className="py-3 pr-2 whitespace-nowrap">
                       <button
                         type="button"
                         onClick={() => setNoteTx(tx)}
