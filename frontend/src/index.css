@@ -40,7 +40,7 @@ html {
 
 body {
   margin: 0;
-  min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
   overflow-wrap: break-word;
   background: var(--bg-dark);
@@ -54,15 +54,18 @@ body {
 .chart-shell .recharts-surface {
   outline: none !important;
 }
+/* Mobile: the document itself scrolls, so the browser toolbar collapses naturally and
+   the page grows with it (a fixed-height shell got clipped once the toolbar hid).
+   Desktop: viewport-height shell with the sidebar fixed and <main> scrolling inside. */
 .app-shell {
-  height: 100svh;
-  max-height: 100svh;
+  min-height: 100dvh;
 }
 
 @media (min-width: 1024px) {
   .app-shell {
     height: 100dvh;
     max-height: 100dvh;
+    overflow: hidden;
   }
 }
 

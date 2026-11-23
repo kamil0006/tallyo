@@ -31,7 +31,7 @@ export function Layout({ children }: LayoutProps) {
   }, [pathname])
 
   return (
-    <div className="app-shell flex min-h-0 overflow-hidden bg-(--bg-dark)">
+    <div className="app-shell flex bg-(--bg-dark)">
       <GlobalKeyboardShortcuts />
       <GlobalQuickTransaction />
       <GlobalQuickNote />
@@ -42,11 +42,11 @@ export function Layout({ children }: LayoutProps) {
       <GlobalPomodoro />
       <Sidebar />
       <MobileDrawer open={mobileNavOpen} onClose={() => setMobileNavOpen(false)} />
-      <div className="flex min-h-0 min-w-0 flex-1 flex-col">
+      <div className="flex min-w-0 flex-1 flex-col lg:min-h-0">
         <MobileHeader onMenuClick={() => setMobileNavOpen(true)} />
         <div className="mobile-header-spacer lg:hidden" aria-hidden="true" />
         <main
-          className={`scrollbar-hidden relative min-w-0 flex-1 overflow-x-hidden overflow-y-auto px-4 pt-4 sm:px-6 lg:p-10 ${
+          className={`scrollbar-hidden relative min-w-0 flex-1 overflow-x-hidden px-4 lg:overflow-y-auto pt-4 sm:px-6 lg:p-10 ${
             timerIndicatorShown
               ? 'pb-[calc(5rem+env(safe-area-inset-bottom))] lg:pb-24'
               : 'pb-[max(1.5rem,env(safe-area-inset-bottom))]'
